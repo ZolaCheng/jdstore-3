@@ -1,14 +1,10 @@
- class Admin::ProductsController < ApplicationController
+class Admin::ProductsController < ApplicationController
+  layout "admin"
   before_action :authenticate_user!
   before_action :admin_required
-  layout "admin"
-
-  def show
-    @product = Product.find(params[:id])
-  end
 
   def index
-   @products = Product.all
+    @products = Product.all
   end
 
   def new
@@ -25,7 +21,7 @@
     if @product.update(product_params)
       redirect_to admin_products_path
     else
-       ender :edit
+      render :edit
     end
   end
 
@@ -38,8 +34,6 @@
       render :new
     end
   end
-
-
 
   private
 
